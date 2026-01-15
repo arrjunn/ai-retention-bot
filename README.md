@@ -23,7 +23,7 @@ This workflow handles the customer lifecycle from the moment a photo is taken.
 * **Generative AI:** Uses **Llama 3 (via Groq)** to generate unique, context-aware puns based on the guest's name.
 * **Time-Intelligence:** Checks the current time before sending follow-ups. If it is night (9 PM - 9 AM), the bot "sleeps" to protect Brand UX.
 
-![Workflow Architecture](<img width="1711" height="528" alt="image" src="https://github.com/user-attachments/assets/f5865068-d73f-4934-8d72-bca6fb1ec044" />
+![Workflow Architecture](![Screenshot_16-1-2026_11435_arjunvvv app n8n cloud](https://github.com/user-attachments/assets/4bf2ff34-19ca-42b2-9b92-0c3006030023)
 )
 *(Fig 1: The Main Lifecycle Workflow showing Segmentation and Time Logic)*
 
