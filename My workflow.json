@@ -1,0 +1,857 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1EPDyBPazw1osBZM28z2-ndTk-JwAh6pj0EzZH9wQG-I/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EPDyBPazw1osBZM28z2-ndTk-JwAh6pj0EzZH9wQG-I/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        32
+      ],
+      "id": "cee58754-bb6f-43f1-9a6f-79cde611bad6",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "YkImGFAvWFor20uF",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+18127831599",
+        "to": "={{ $('Google Sheets Trigger').item.json['Phone Number'] }}",
+        "message": "={{ $json.choices[0].message.content }}Mind rating the vibe? 👇 \nhttps://forms.gle/6efoy3BB6fCXBXMd7",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        -208
+      ],
+      "id": "71dfe8ec-6c75-45d5-b7e2-d379f9ac3e0d",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "xCG0JYJJz4AvMyky",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "=+18127831599",
+        "to": "={{ $('Google Sheets Trigger').item.json['Phone Number'] }}",
+        "message": "=Missing the fun? 🕺 Grab your friends and create more memories!\nShow this text for 10% OFF your next Hatk booking.Code: FRIEND10",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        2464,
+        -112
+      ],
+      "id": "31dcdd47-db64-4bd1-ba7a-33602e2b59e8",
+      "name": "Send an SMS/MMS/WhatsApp message1",
+      "credentials": {
+        "twilioApi": {
+          "id": "xCG0JYJJz4AvMyky",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+18127831599",
+        "to": "={{ $('Google Sheets Trigger').item.json['Phone Number'] }}",
+        "message": "=Hi {{ $('Google Sheets Trigger').item.json['Name of Customer'] }}, thanks for choosing Hatk for your event. 🤝  We hope your team had a great time! For corporate partnerships or bulk invoices, please reply 'BIZ' to connect with our account manager.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        448,
+        224
+      ],
+      "id": "5af2d34f-aa80-4fad-b082-261a013de4d1",
+      "name": "Send an SMS/MMS/WhatsApp message2",
+      "credentials": {
+        "twilioApi": {
+          "id": "xCG0JYJJz4AvMyky",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a5adaf9a-aea0-4f18-afd1-eac3b27d9035",
+              "name": "Group",
+              "value": "={{ Math.random() > 0.5 ? 'A' : 'B' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        -112
+      ],
+      "id": "488a664c-d9a0-4450-a4e9-1a3e8e03c966",
+      "name": "Assign Group"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1EPDyBPazw1osBZM28z2-ndTk-JwAh6pj0EzZH9wQG-I",
+          "mode": "list",
+          "cachedResultName": "Hatk data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EPDyBPazw1osBZM28z2-ndTk-JwAh6pj0EzZH9wQG-I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EPDyBPazw1osBZM28z2-ndTk-JwAh6pj0EzZH9wQG-I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "Test Group"
+          ],
+          "schema": [
+            {
+              "id": "Name of Customer",
+              "displayName": "Name of Customer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email ID",
+              "displayName": "Email ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date of First Capture",
+              "displayName": "Date of First Capture",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Visit to Booth",
+              "displayName": "Last Visit to Booth",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Test Group",
+              "displayName": "Test Group",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Group",
+              "displayName": "Group",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        -112
+      ],
+      "id": "debab4ba-65de-4591-8a72-00a55cc151b4",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "V077JyeNYpP1Bvhl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+18127831599",
+        "to": "={{ $('Google Sheets Trigger').item.json['Phone Number'] }}",
+        "message": "=Hi {{ $('Google Sheets Trigger').item.json['Name of Customer'] }}, thank you for visiting Hatk!. We hope to see you again soon!\nplease tell us your experince here : https://docs.google.com/forms/d/e/1FAIpQLSegyWu2p3x7ML9vC5kfCGaYS0xu42MsZtmtHE67nC7CeQTW_A/viewform?usp=dialog",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        -16
+      ],
+      "id": "bce4294e-75e8-4642-b12a-89c13360f94f",
+      "name": "Send an SMS/MMS/WhatsApp message3",
+      "credentials": {
+        "twilioApi": {
+          "id": "xCG0JYJJz4AvMyky",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5e532299-c89c-4dfa-b98d-4168be40d518",
+              "leftValue": "={{ $json['Email ID'] }}",
+              "rightValue": "gmail.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "33d52ec1-ba7e-4ffe-8080-4f4eff640425",
+              "leftValue": "={{ $json['Email ID'] }}",
+              "rightValue": "outlook.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        32
+      ],
+      "id": "9350f5e1-bb9c-4b21-baa6-2db6296f2183",
+      "name": "Business or Personal"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "99d1dd25-26a8-4758-a02e-241d9494dc04",
+              "leftValue": "={{ $json.Group }}",
+              "rightValue": "A",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        896,
+        -112
+      ],
+      "id": "886025bc-c53a-4955-a179-fb63c0d3295d",
+      "name": "GroupA,B Split"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1568,
+        -112
+      ],
+      "id": "c36560f0-cefb-4283-8827-fd3a69036838",
+      "name": "4 days follow up",
+      "webhookId": "7cb866a9-8192-4613-b710-f46b3f2d116c"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $now }}",
+        "format": "custom",
+        "customFormat": "H",
+        "outputFieldName": "=Time",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        -112
+      ],
+      "id": "8cd45880-9169-4212-b200-aab1dc2705ce",
+      "name": "checks current time"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1af14b84-40f2-48ff-8a54-a507a722d977",
+              "leftValue": "={{ $json.Time }}",
+              "rightValue": 9,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "b0ef6a21-275f-4ecc-9cbc-10fa04b5c50f",
+              "leftValue": "={{ $json.Time }}",
+              "rightValue": 21,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2016,
+        -112
+      ],
+      "id": "fcb7c8c5-70cb-43d5-b453-764519e87277",
+      "name": "sends follow up after 9am and before 9pm"
+    },
+    {
+      "parameters": {
+        "amount": 12
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2240,
+        -40
+      ],
+      "id": "d4adae24-0714-4ad9-bd63-d5d841346e68",
+      "name": "if after 9pm then waits for 12 hours to be 9am then sends follow up",
+      "webhookId": "df26931d-28d0-4102-a623-69d545232ac0"
+    },
+    {
+      "parameters": {
+        "sendTo": "bt23cse068@iiitn.ac.in",
+        "subject": "=VIP Lead Detected: {{ $('Google Sheets Trigger').item.json['Name of Customer'] }}",
+        "message": "=Heads up! A new lead came in with a business email domain.  Name: {{ $('Google Sheets Trigger').item.json['Name of Customer'] }} Email: {{ $('Google Sheets Trigger').item.json['Email ID'] }} Phone: {{ $('Google Sheets Trigger').item.json['Phone Number'] }}  They have received the corporate greeting. Please follow up manually",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        224
+      ],
+      "id": "331de676-f7de-4f87-8be9-92f1efe8ac7a",
+      "name": "Alert Sales Team (CRM)",
+      "webhookId": "8095223c-f820-419a-b5e0-5e2442d7479a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "jlKehnNUBAyrHcnR",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "=+18127831599",
+        "to": "={{ $('Google Sheets Trigger').item.json['Phone Number'] }}",
+        "message": "=Missing the fun? 🕺 Grab your friends and create more memories!\nShow this text for 10% OFF your next Hatk booking.Code: FRIEND10",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1792,
+        224
+      ],
+      "id": "bc4a2287-8c09-4980-86a1-606e7be93592",
+      "name": "Send an SMS/MMS/WhatsApp message4",
+      "credentials": {
+        "twilioApi": {
+          "id": "xCG0JYJJz4AvMyky",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        224
+      ],
+      "id": "b8b68492-1415-44f4-b514-d72e00156c17",
+      "name": "4 days follow up1",
+      "webhookId": "7cb866a9-8192-4613-b710-f46b3f2d116c"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $now }}",
+        "format": "custom",
+        "customFormat": "H",
+        "outputFieldName": "=Time",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        224
+      ],
+      "id": "b6a31959-3465-4229-8671-3d65d1a00fa0",
+      "name": "checks current time1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1af14b84-40f2-48ff-8a54-a507a722d977",
+              "leftValue": "={{ $json.Time }}",
+              "rightValue": 9,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "b0ef6a21-275f-4ecc-9cbc-10fa04b5c50f",
+              "leftValue": "={{ $json.Time }}",
+              "rightValue": 21,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1344,
+        224
+      ],
+      "id": "3aa87617-4f9c-4b77-bfca-be62ded43c98",
+      "name": "sends follow up after 9am and before 9pm1"
+    },
+    {
+      "parameters": {
+        "amount": 12
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1568,
+        296
+      ],
+      "id": "24fe442d-bb1a-47f4-a602-145eb12bbb33",
+      "name": "if after 9pm then waits for 12 hours to be 9am then sends follow up1",
+      "webhookId": "df26931d-28d0-4102-a623-69d545232ac0"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.1-8b-instant\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a comedian. Output ONLY the joke itself. Do not write introductions like 'Here is a joke'. Do not write explanations like 'Since this name is...'. Just the punchline.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a 1-sentence pun for the name {{ $json['Name of Customer'] }} . If the name is generic, just make a short party joke.\"\n    }\n  ],\n  \"temperature\": 0.5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1120,
+        -208
+      ],
+      "id": "414ae62d-763c-44fd-947d-d2dc606e68d2",
+      "name": "ai working to create unique message"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Business or Personal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message": {
+      "main": [
+        [
+          {
+            "node": "4 days follow up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message1": {
+      "main": [
+        []
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message2": {
+      "main": [
+        [
+          {
+            "node": "Alert Sales Team (CRM)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign Group": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "GroupA,B Split",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message3": {
+      "main": [
+        [
+          {
+            "node": "4 days follow up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Business or Personal": {
+      "main": [
+        [
+          {
+            "node": "Assign Group",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GroupA,B Split": {
+      "main": [
+        [
+          {
+            "node": "ai working to create unique message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4 days follow up": {
+      "main": [
+        [
+          {
+            "node": "checks current time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checks current time": {
+      "main": [
+        [
+          {
+            "node": "sends follow up after 9am and before 9pm",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sends follow up after 9am and before 9pm": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "if after 9pm then waits for 12 hours to be 9am then sends follow up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if after 9pm then waits for 12 hours to be 9am then sends follow up": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert Sales Team (CRM)": {
+      "main": [
+        [
+          {
+            "node": "4 days follow up1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4 days follow up1": {
+      "main": [
+        [
+          {
+            "node": "checks current time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checks current time1": {
+      "main": [
+        [
+          {
+            "node": "sends follow up after 9am and before 9pm1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sends follow up after 9am and before 9pm1": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "if after 9pm then waits for 12 hours to be 9am then sends follow up1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if after 9pm then waits for 12 hours to be 9am then sends follow up1": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ai working to create unique message": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "652079ea-1b54-4a1f-a4f3-b0c06a8c3920",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1871ad03f269d39be277f7725571770dea3cf0d8034c5025a5d46df9226a0f41"
+  },
+  "id": "EucHXybDnApLvUqt",
+  "tags": []
+}
